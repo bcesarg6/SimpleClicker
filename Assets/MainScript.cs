@@ -31,7 +31,7 @@ public class MainScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        score = 0; //Initial score
+        score = 1000000000; //Initial score
         overtime = 0;
         somador = 1; //Initial multiplaier
         modificador_counter = 1;
