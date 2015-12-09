@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class MainScript : MonoBehaviour {
+    int first;
     int score;
     int somador;
     int overtime;
@@ -18,6 +19,7 @@ public class MainScript : MonoBehaviour {
     string plus_button_string;
     string overtime_button_string;
     string exit_shop_button_string;
+    public GameObject debug_text;
     public GameObject title_text;
     public GameObject score_text;
     public GameObject overtime_text;
@@ -31,11 +33,17 @@ public class MainScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        score = 1000000000; //Initial score
-        overtime = 0;
-        somador = 1; //Initial multiplaier
-        modificador_counter = 1;
-        modificador_overtime = 1;
+        first = PlayerPrefs.GetInt("first", 0);
+        score = PlayerPrefs.GetInt("score", 0);
+        overtime = PlayerPrefs.GetInt("overtime", 0);
+        somador = PlayerPrefs.GetInt("somador", 1);
+        modificador_counter = PlayerPrefs.GetInt("modificador_counter", 1);
+        modificador_overtime = PlayerPrefs.GetInt("modificador_overtime", 1);
+        if(first == 0) {
+            print_text("first");
+            att_data();
+        }
+        else { print_text("not first"); }
         title_string = "Clicker 2.0"; //Title
         congrat_string = "Parabéns, você tem um upgrade"; 
         shop_text_string = "Shop";
@@ -63,12 +71,27 @@ public class MainScript : MonoBehaviour {
         StartCoroutine(overtime_score());
 	}
 
+    void print_text(string text){
+        debug_text.GetComponent<Text>().text = text;
+    }
+
     IEnumerator overtime_score(){
         while (overtime_text){
             score = score + overtime;
+            att_data();
             score_text.GetComponent<Text>().text = score.ToString();
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    void att_data(){
+        PlayerPrefs.SetInt("first", 1);
+        PlayerPrefs.SetInt("score", score);
+        PlayerPrefs.SetInt("overtime", overtime);
+        PlayerPrefs.SetInt("somador", somador);
+        PlayerPrefs.SetInt("modificador_counter", modificador_counter);
+        PlayerPrefs.SetInt("modificador_overtime", modificador_overtime);
+        PlayerPrefs.Save();
     }
 
     bool verify_upgrade(){
@@ -147,5 +170,10 @@ public class MainScript : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
+    }
+
+    void OnApplicationQuit(){
+        att_data();
+        print_text("quit");
     }
 }
