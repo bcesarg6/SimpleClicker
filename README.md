@@ -1,3 +1,0 @@
-# SimpleClicker
-
-Just for test
