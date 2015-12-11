@@ -7,8 +7,8 @@ public class MainScript : MonoBehaviour {
     int score;
     int somador;
     int overtime;
-    int modificador_counter;
-    int modificador_overtime;
+    int mod_counter;
+    int mod_overtime;
     int counter_price;
     int overtime_price;
     string title_string;
@@ -37,13 +37,13 @@ public class MainScript : MonoBehaviour {
         score = PlayerPrefs.GetInt("score", 0);
         overtime = PlayerPrefs.GetInt("overtime", 0);
         somador = PlayerPrefs.GetInt("somador", 1);
-        modificador_counter = PlayerPrefs.GetInt("modificador_counter", 1);
-        modificador_overtime = PlayerPrefs.GetInt("modificador_overtime", 1);
+        mod_counter = PlayerPrefs.GetInt("mod_counter", 1);
+        mod_overtime = PlayerPrefs.GetInt("mod_overtime", 1);
         if(first == 0) {
-            print_text("first");
-            att_data();
+            printText("first");
+            attData();
         }
-        else { print_text("not first"); }
+        else { printText("not first"); }
         title_string = "Clicker 2.0"; //Title
         congrat_string = "Parabéns, você tem um upgrade"; 
         shop_text_string = "Shop";
@@ -68,46 +68,46 @@ public class MainScript : MonoBehaviour {
         congrat_text.SetActive(false);
         shop_button.SetActive(false);
         shop_panel.SetActive(false);
-        StartCoroutine(overtime_score());
+        StartCoroutine(overtimeScore());
 	}
 
-    void print_text(string text){
+    void printText(string text){
         debug_text.GetComponent<Text>().text = text;
     }
 
-    IEnumerator overtime_score(){
+    IEnumerator overtimeScore(){
         while (overtime_text){
             score = score + overtime;
-            att_data();
+            attData();
             score_text.GetComponent<Text>().text = score.ToString();
             yield return new WaitForSeconds(1f);
         }
     }
 
-    void att_data(){
+    void attData(){
         PlayerPrefs.SetInt("first", 1);
         PlayerPrefs.SetInt("score", score);
         PlayerPrefs.SetInt("overtime", overtime);
         PlayerPrefs.SetInt("somador", somador);
-        PlayerPrefs.SetInt("modificador_counter", modificador_counter);
-        PlayerPrefs.SetInt("modificador_overtime", modificador_overtime);
+        PlayerPrefs.SetInt("mod_counter", mod_counter);
+        PlayerPrefs.SetInt("mod_overtime", mod_overtime);
         PlayerPrefs.Save();
     }
 
-    bool verify_upgrade(){
-        att_price();
+    bool verifyUpgrade(){
+        attPrice();
         if ((score >= counter_price) || (score >= overtime_price)){
             return true;
         }
         return false;
     }
 
-    void att_price(){
-        counter_price = 10 * somador * modificador_counter;
-        overtime_price = 10 * (overtime + 1) * modificador_overtime;
+    void attPrice(){
+        counter_price = 10 * somador * mod_counter;
+        overtime_price = 10 * (overtime + 1) * mod_overtime;
     }
 
-    void att_shop(){
+    void attShop(){
         if (shop_panel.activeSelf){
             plus_button_string = mais_string + (somador + 1).ToString();
             overtime_button_string = mais_string + (overtime + 1).ToString() + secs_string;
@@ -119,53 +119,53 @@ public class MainScript : MonoBehaviour {
     }
 
     //Is called every time the score_button is pressed
-    public void update_score(){
+    public void updateScore(){
         score = score + somador;
         score_text.GetComponent<Text>().text = score.ToString();
-        if (verify_upgrade()){
+        if (verifyUpgrade()){
             congrat_text.SetActive(true);
             shop_button.SetActive(true);
         }
     }
 
     //Is called every time the shop_button is pressed
-    public void open_shop(){
+    public void openShop(){
         shop_panel.SetActive(true);
-        att_price();
-        att_shop();
+        attPrice();
+        attShop();
     }
 
-    public void plus_counter(){
-        if(score >= (10 * somador * modificador_counter)){
-            score = score - (10 * somador * modificador_counter);
+    public void plusCounter(){
+        if(score >= (10 * somador * mod_counter)){
+            score = score - (10 * somador * mod_counter);
             somador = somador + 1;
-            modificador_counter = modificador_counter + 1;
+            mod_counter = mod_counter + 1;
             score_button.GetComponentInChildren<Text>().text = mais_string + somador;
             score_text.GetComponent<Text>().text = score.ToString();
 
-            if (!(verify_upgrade())){
+            if (!(verifyUpgrade())){
                 congrat_text.SetActive(false);
             }
-            att_shop();
+            attShop();
         }
     }
 	
-    public void plus_overtime(){
-        if((score >= (10 * (overtime + 1) * modificador_overtime))){
-            score = score - (10 * (overtime + 1) * modificador_overtime);
+    public void plusOvertime(){
+        if((score >= (10 * (overtime + 1) * mod_overtime))){
+            score = score - (10 * (overtime + 1) * mod_overtime);
             overtime = overtime + 1;
-            modificador_overtime = modificador_overtime + 1;
+            mod_overtime = mod_overtime + 1;
             score_text.GetComponent<Text>().text = score.ToString();
             overtime_text.GetComponent<Text>().text = overtime.ToString() + secs_string;
 
-            if (!(verify_upgrade())){
+            if (!(verifyUpgrade())){
                 congrat_text.SetActive(false);
             }
-            att_shop();
+            attShop();
         }
     }
 
-    public void exit_shop(){
+    public void exitShop(){
         shop_panel.SetActive(false);
     }
 	// Update is called once per frame
@@ -173,7 +173,7 @@ public class MainScript : MonoBehaviour {
     }
 
     void OnApplicationQuit(){
-        att_data();
-        print_text("quit");
+        attData();
+        printText("quit");
     }
 }
