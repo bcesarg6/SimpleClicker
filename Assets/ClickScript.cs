@@ -1,13 +1,31 @@
-﻿using UnityEngine;
+﻿//This script is the base for any other button click script
+
+using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class ClickScript : MonoBehaviour, IPointerClickHandler {
+public class ClickScript : MonoBehaviour, IPointerDownHandler, IPointerClickHandler, IPointerUpHandler {
     public MainScript main_script;  //Our main script
 
-    //Function fired when a click event happens
-    public void OnPointerClick(PointerEventData pointer_data) {
-        main_script.score = main_script.score + 1;
-        main_script.attScore();
+    //When the object is created
+    void Start() {
+
     }
+
+    //Called when the pointer makes a click (just down)
+    public void OnPointerDown(PointerEventData pointer_data) {
+        this.GetComponent<Image>().color = new Color(this.GetComponent<Image>().color.r, this.GetComponent<Image>().color.g, this.GetComponent<Image>().color.b, 0.5f);
+    }
+
+    //Function fired when a click (up and down) event happens
+    public void OnPointerClick(PointerEventData pointer_data) {
+
+    }
+
+    //Called when the pointer "ends" the click (realeses the button)
+    public void OnPointerUp(PointerEventData pointer_data) {
+        this.GetComponent<Image>().color = new Color(this.GetComponent<Image>().color.r, this.GetComponent<Image>().color.g, this.GetComponent<Image>().color.b, 1f);
+    }
+
 }

@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -75,7 +69,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ClickScript.cs" />
+    <Compile Include="Assets\DragScript.cs" />
+    <Compile Include="Assets\ExitShopScript.cs" />
     <Compile Include="Assets\MainScript.cs" />
+    <Compile Include="Assets\OvertimeButtonScript.cs" />
+    <Compile Include="Assets\PlusButtonScript.cs" />
+    <Compile Include="Assets\ScoreButtonScript.cs" />
+    <Compile Include="Assets\ShopOpenScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

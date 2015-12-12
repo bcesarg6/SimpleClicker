@@ -1,10 +1,19 @@
 fileFormatVersion: 2
 guid: 13e248d7880f73345875b806acdf5ace
-timeCreated: 1449870629
+timeCreated: 1449894861
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - plus_text: {instanceID: 0}
+  - score_text: {instanceID: 0}
+  - overtime_text: {instanceID: 0}
+  - plus_button_text: {instanceID: 0}
+  - overtime_button_text: {instanceID: 0}
+  - plus_price_text: {instanceID: 0}
+  - overtime_price_text: {instanceID: 0}
+  - congrat_text: {instanceID: 0}
+  - shop_button: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
