@@ -129,8 +129,8 @@ public class MainScript : MonoBehaviour {
         saveData("score", score);
         saveData("last_time", current_time.ToString());
 
-        if (verifyUpgrade()) {            
-            shop_button.SetActive(true);
+        if (verifyUpgrade()) {
+			shop_button.GetComponent<Image>().color = new Color( 1f, 1f, 0f, 1f);
         }
     }
 
@@ -146,6 +146,9 @@ public class MainScript : MonoBehaviour {
         plus_price_text.text = plus_price.ToString();
 
         overtime_button_text.text = (overtime + 1).ToString() + "/sec";
-        overtime_price_text.text = overtime_price.ToString();  
+        overtime_price_text.text = overtime_price.ToString();
+		if (!verifyUpgrade()){
+			shop_button.GetComponent<Image>().color = new Color( 0.76f, 0.76f, 0.76f, 1f);
+		}
     }
 }

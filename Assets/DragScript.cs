@@ -13,7 +13,7 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     //When the object is created
     void Start() {
-        this.gameObject.SetActive(false); //We set it to inactive so it does not appear on the screen
+        this.gameObject.SetActive(true); //We set it to inactive so it does not appear on the screen
     }
 
     //Fired when drag starts. Gets the initial pointer position and calculates the difference
